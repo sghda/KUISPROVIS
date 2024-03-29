@@ -85,12 +85,306 @@ class _MyHomePageState extends State<MyHomePage> {
 
   //jaawaban no 1
   Widget soalNo1() {
+    
+    DateTime pilihTanggal = DateTime.now();
+    String? selectedGender;
     return Scaffold(
-        appBar: AppBar(
-          backgroundColor: Theme.of(context).colorScheme.inversePrimary,
+      
+    appBar: AppBar(
+          iconTheme: IconThemeData(color: Colors.white),
+          // backgroundColor: Theme.of(context).colorScheme.inversePrimary,
+          backgroundColor: Color.fromRGBO(35, 60, 95, 1),
         ),
-        body: const Text("ini jawaban no 1"));
+        body: 
+        // const Text("ini jawaban no 1")
+        Stack(
+          children: [
+            ClipPath(
+              clipper: ClipPathClass(),
+              child: Container(
+                color: Color.fromRGBO(35, 60, 95, 1),
+                height: MediaQuery.of(context).size.height * 0.2,
+              ),
+            ),
+            Padding(
+              padding: const EdgeInsets.fromLTRB(30, 0, 0, 0),
+              child: Text(
+                'Profil', 
+                style: TextStyle(
+                  color: Colors.white, 
+                  fontSize: 26,
+                  fontWeight: FontWeight.bold
+                ),
+              ),
+            ),
+            Container(
+              margin: EdgeInsets.only(top: 60, left: 30, right: 30, bottom: 30),
+              decoration: BoxDecoration(
+                color: Colors.white,
+                border: Border.all(color: Colors.black, width: 1),
+                borderRadius: BorderRadius.circular(15),
+              ),
+              child: Column(
+                children: [
+                  Container(
+                    margin: EdgeInsets.only(top: 10, left: 10, right: 10, bottom: 10),
+                    // color: Colors.blue,
+                    height: 100,
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        Expanded(
+                          child: Container(
+                            // width: 50,
+                            // height: 50,
+
+                            // color: Colors.green,
+                            decoration: BoxDecoration(
+                              border: Border.all(color: Colors.black, width: 1),
+                              borderRadius: BorderRadius.circular(10),
+                            ),
+                            child: Column(children: [
+                              Expanded(
+                                flex: 2,
+                                child: Container(
+                                  decoration: BoxDecoration(
+                                    color: Colors.white,
+                                    borderRadius: BorderRadius.only(
+                                      topLeft: Radius.circular(10),
+                                      topRight: Radius.circular(10)
+                                    )
+                                  ),
+                                  ),
+                              ),
+                              
+                              Expanded(
+                                child: Container(
+                                  decoration: BoxDecoration(
+                                    color: Color.fromRGBO(35, 60, 95, 1),
+                                    borderRadius: BorderRadius.only(
+                                      bottomLeft: Radius.circular(10),
+                                      bottomRight: Radius.circular(10)
+                                    )
+                                  ),
+                                  // color: Color.fromRGBO(35, 60, 95, 1),
+                                ),
+                              )
+                            ],),
+                          ),
+                        ),
+                        Expanded(
+                          child: Container(
+                            // color: Colors.yellow,
+                            child: Column(
+                              children: [
+                                Align(
+                                  alignment: Alignment.centerLeft,
+                                  child: Text(
+                                    "Nama Panjang",
+                                    style: TextStyle(
+                                      color: Color.fromRGBO(35, 60, 95, 1),
+                                      fontSize: 16,
+                                      fontWeight: FontWeight.bold
+                                    ),
+                                  ),
+                                ),
+                                TextField(
+                                  decoration: InputDecoration(
+                                    border: OutlineInputBorder(),
+                                    hintText: "Masukkan Nama Panjang"
+                                  ),
+                                )
+                              ],
+                            ),
+                          ),
+                        )
+                    ],),
+                  ),
+                  Container(
+                    margin: EdgeInsets.only(left: 10, right: 10, bottom: 10),
+                    // color: Colors.red,
+                    height: 100,
+                    child: Column(
+                              children: [
+                                Align(
+                                  alignment: Alignment.centerLeft,
+                                  child: Text(
+                                    "NIK",
+                                    style: TextStyle(
+                                      color: Color.fromRGBO(35, 60, 95, 1),
+                                      fontSize: 16,
+                                      fontWeight: FontWeight.bold
+                                    ),
+                                  ),
+                                ),
+                                TextField(
+                                  decoration: InputDecoration(
+                                    border: OutlineInputBorder(),
+                                    hintText: "Masukkan NIK"
+                                  ),
+                                )
+                              ],
+                            ),
+                  ),
+                  Container(
+                    
+                    margin: EdgeInsets.only(left: 10, right: 10, bottom: 10),
+                    height: 100,
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        Expanded(
+                          child: Container(
+                            child: Column(
+                              children: [
+                                Align(
+                                  alignment: Alignment.centerLeft,
+                                  child: Text(
+                                    "Tanggal Lahir",
+                                    style: TextStyle(
+                                      color: Color.fromRGBO(35, 60, 95, 1),
+                                      fontSize: 16,
+                                      fontWeight: FontWeight.bold
+                                    ),
+                                  ),
+                                ),
+                                // form tanggal 
+                                TextField(
+                                  decoration: InputDecoration(
+                                    border: OutlineInputBorder(),
+                                    hintText: "DD/MM/YYYY",
+                                    suffixIcon: IconButton(
+                                      icon: Icon(Icons.calendar_today),
+                                      onPressed: () async {
+                                        final DateTime? picked = await showDatePicker(
+                                          context: context,
+                                          initialDate: DateTime.now(),
+                                          firstDate: DateTime(1900),
+                                          lastDate: DateTime.now()
+                                        );
+                                        if (picked != null && picked != pilihTanggal) {
+                                          setState(() {
+                                            pilihTanggal = picked;
+                                          });
+                                        }
+                                      },
+                                    )
+
+                                  ),
+                                )
+                              ],
+                            ),
+                          ),
+                        ),
+                        Expanded(
+                          child: Container(
+                            // color: Colors.yellow,
+                            child: Column(
+                              children: [
+                                Align(
+                                  alignment: Alignment.centerLeft,
+                                  child: Text(
+                                    "Gender",
+                                    style: TextStyle(
+                                      color: Color.fromRGBO(35, 60, 95, 1),
+                                      fontSize: 16,
+                                      fontWeight: FontWeight.bold
+                                    ),
+                                  ),
+                                ),
+                                // drop down form hint sama ada borrdernya
+                                DropdownButton<String>(
+                                  value: selectedGender,
+                                  items: <String>['Laki-laki', 'Perempuan'].map((String value) {
+                                    return DropdownMenuItem<String>(
+                                      value: value,
+                                      child: Text(value),
+                                    );
+                                  }).toList(),
+                                  onChanged: (String? newValue) {
+                                    setState(() {
+                                      selectedGender = newValue;
+                                    });
+                                  },
+                                )  
+                              ],
+                            ),
+                          ),
+                        )
+                    ],),
+                  ),
+                  Container(
+                    margin: EdgeInsets.only(left: 10, right: 10, bottom: 10),
+                    // color: Colors.red,
+                    height: 100,
+                    child: Column(
+                              children: [
+                                Align(
+                                  alignment: Alignment.centerLeft,
+                                  child: Text(
+                                    "Email",
+                                    style: TextStyle(
+                                      color: Color.fromRGBO(35, 60, 95, 1),
+                                      fontSize: 16,
+                                      fontWeight: FontWeight.bold
+                                    ),
+                                  ),
+                                ),
+                                TextField(
+                                  decoration: InputDecoration(
+                                    border: OutlineInputBorder(),
+                                    hintText: "Masukkan Email"
+                                  ),
+                                )
+                              ],
+                            ),
+                  ),
+                  Container(
+                    margin: EdgeInsets.only(left: 10, right: 10, bottom: 10),
+                    // color: Colors.red,
+                    height: 100,
+                    child: Column(
+                              children: [
+                                Align(
+                                  alignment: Alignment.centerLeft,
+                                  child: Text(
+                                    "Alamat Rumah",
+                                    style: TextStyle(
+                                      color: Color.fromRGBO(35, 60, 95, 1),
+                                      fontSize: 16,
+                                      fontWeight: FontWeight.bold
+                                    ),
+                                  ),
+                                ),
+                                TextField(
+                                  decoration: InputDecoration(
+                                    border: OutlineInputBorder(),
+                                    hintText: "Masukkan Alamat Rumah"
+                                  ),
+                                )
+                              ],
+                            ),
+                  ),
+                  ElevatedButton(
+                    onPressed: () => {}, 
+                    child: Text("Simpan"),
+                    style: ElevatedButton.styleFrom(
+                      // ukurannya panjangin sedikit
+                      minimumSize: Size(150,50),
+                      foregroundColor: Colors.white, backgroundColor: Color.fromRGBO(35, 60, 95, 1),
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(10)
+                      )
+                    ),
+                  )
+                ],
+              ),
+            )
+          ],
+        )
+    );
   }
+  
 
 Widget soalNo2() {
   return Scaffold(
@@ -247,4 +541,22 @@ Widget buildStack(String text, IconData iconData, double iconSize) {
       ],
     ),
   );
+}
+
+
+class ClipPathClass extends CustomClipper<Path> {
+  @override
+  Path getClip(Size size) {
+    var path = Path();
+    path.lineTo(0, size.height - 40);
+    path.quadraticBezierTo(size.width / 2, size.height, size.width, size.height - 40);
+    path.lineTo(size.width, 0);
+    path.close();
+    return path;
+  }
+
+  @override
+  bool shouldReclip(CustomClipper<Path> oldClipper) {
+    return false;
+  }
 }
