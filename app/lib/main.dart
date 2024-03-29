@@ -1,5 +1,8 @@
+import 'dart:io';
+
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
+import 'package:file_picker/file_picker.dart';
 
 void main() {
   runApp(const MyApp());
@@ -85,20 +88,22 @@ class _MyHomePageState extends State<MyHomePage> {
 
   //jaawaban no 1
   Widget soalNo1() {
+    
     DateTime pilihTanggal = DateTime.now();
     String? selectedGender;
     return Scaffold(
-        appBar: AppBar(
+      
+    appBar: AppBar(
           iconTheme: IconThemeData(color: Colors.white),
           // backgroundColor: Theme.of(context).colorScheme.inversePrimary,
           backgroundColor: Color.fromRGBO(35, 60, 95, 1),
         ),
-        body:
-            // const Text("ini jawaban no 1")
-            Stack(
+        body: 
+        // const Text("ini jawaban no 1")
+        Stack(
           children: [
             ClipPath(
-              // clipper: ClipPathClass(),
+              clipper: ClipPathClass(),
               child: Container(
                 color: Color.fromRGBO(35, 60, 95, 1),
                 height: MediaQuery.of(context).size.height * 0.2,
@@ -107,11 +112,12 @@ class _MyHomePageState extends State<MyHomePage> {
             Padding(
               padding: const EdgeInsets.fromLTRB(30, 0, 0, 0),
               child: Text(
-                'Profil',
+                'Profil', 
                 style: TextStyle(
-                    color: Colors.white,
-                    fontSize: 26,
-                    fontWeight: FontWeight.bold),
+                  color: Colors.white, 
+                  fontSize: 26,
+                  fontWeight: FontWeight.bold
+                ),
               ),
             ),
             Container(
@@ -124,49 +130,77 @@ class _MyHomePageState extends State<MyHomePage> {
               child: Column(
                 children: [
                   Container(
-                    margin: EdgeInsets.only(
-                        top: 10, left: 10, right: 10, bottom: 10),
+                    margin: EdgeInsets.only(top: 10, left: 15, right: 15, bottom: 5),
                     // color: Colors.blue,
                     height: 100,
                     child: Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
                         Expanded(
                           child: Container(
-                            // width: 50,
-                            // height: 50,
-
-                            // color: Colors.green,
+                            margin: EdgeInsets.all(10),
                             decoration: BoxDecoration(
                               border: Border.all(color: Colors.black, width: 1),
                               borderRadius: BorderRadius.circular(10),
                             ),
                             child: Column(
                               children: [
-                                Expanded(
-                                  flex: 2,
-                                  child: Container(
-                                    decoration: BoxDecoration(
+                              Expanded(
+                                flex: 2,
+                                child: Container(
+                                  decoration: BoxDecoration(
+                                    color: Colors.white,
+                                    borderRadius: BorderRadius.only(
+                                      topLeft: Radius.circular(10),
+                                      topRight: Radius.circular(10)
+                                    )
+                                  ),
+                                  
+                                  child: Center(
+                                    child: GestureDetector(
+                                      onTap: () async{
+                                        FilePickerResult? result = await FilePicker.platform.pickFiles(
+                                          type: FileType.custom,
+                                          allowedExtensions: ['jpg', 'jpeg', 'png'],
+                                        );
+                                      },
+                                      child: Text(
+                                        "Masukkan Foto\nProfil",
+                                        textAlign: TextAlign.center,
+                                        style: TextStyle(
+                                          color: Colors.black,
+                                          fontSize: 11,
+                                        ),
+                                      ),
+                                    ),
+                                  )
+                                  ),
+                              ),
+                              
+                              Expanded(
+                                child: Container(
+                                  decoration: BoxDecoration(
+                                    color: Color.fromRGBO(35, 60, 95, 1),
+                                    borderRadius: BorderRadius.only(
+                                      bottomLeft: Radius.circular(10),
+                                      bottomRight: Radius.circular(10)
+                                    )
+                                  ),
+                                  child: Center(
+                                    child: Text(
+                                      "Ubah",
+                                      style: TextStyle(
                                         color: Colors.white,
-                                        borderRadius: BorderRadius.only(
-                                            topLeft: Radius.circular(10),
-                                            topRight: Radius.circular(10))),
-                                  ),
+                                        fontSize: 12,
+                                      ),
+                                    ),
+                                  )
+                                  // color: Color.fromRGBO(35, 60, 95, 1),
                                 ),
-                                Expanded(
-                                  child: Container(
-                                    decoration: BoxDecoration(
-                                        color: Color.fromRGBO(35, 60, 95, 1),
-                                        borderRadius: BorderRadius.only(
-                                            bottomLeft: Radius.circular(10),
-                                            bottomRight: Radius.circular(10))),
-                                    // color: Color.fromRGBO(35, 60, 95, 1),
-                                  ),
-                                )
-                              ],
-                            ),
+                              )
+                            ],),
                           ),
                         ),
+                        SizedBox(width: 10,),
                         Expanded(
                           child: Container(
                             // color: Colors.yellow,
@@ -177,55 +211,75 @@ class _MyHomePageState extends State<MyHomePage> {
                                   child: Text(
                                     "Nama Panjang",
                                     style: TextStyle(
-                                        color: Color.fromRGBO(35, 60, 95, 1),
-                                        fontSize: 16,
-                                        fontWeight: FontWeight.bold),
+                                      color: Color.fromRGBO(35, 60, 95, 1),
+                                      fontSize: 12,
+                                      fontWeight: FontWeight.bold
+                                    ),
                                   ),
                                 ),
+                                SizedBox(height: 5,),
                                 TextField(
                                   decoration: InputDecoration(
-                                      border: OutlineInputBorder(),
-                                      hintText: "Masukkan Nama Panjang"),
+                                    border: OutlineInputBorder(
+                                      borderRadius: BorderRadius.circular(10)
+                                    ),
+                                    hintText: "Masukkan Nama Lengkap",
+                                    hintStyle: TextStyle(
+                                      fontSize: 11,
+                                    ),
+                                    contentPadding: EdgeInsets.symmetric(vertical: 25, horizontal: 12)
+                                  ),
                                 )
                               ],
                             ),
                           ),
                         )
-                      ],
-                    ),
+                    ],),
                   ),
                   Container(
-                    margin: EdgeInsets.only(left: 10, right: 10, bottom: 10),
+                    margin: EdgeInsets.only(left: 15, right: 15, bottom: 5),
                     // color: Colors.red,
-                    height: 100,
+                    height: 85,
                     child: Column(
-                      children: [
-                        Align(
-                          alignment: Alignment.centerLeft,
-                          child: Text(
-                            "NIK",
-                            style: TextStyle(
-                                color: Color.fromRGBO(35, 60, 95, 1),
-                                fontSize: 16,
-                                fontWeight: FontWeight.bold),
-                          ),
-                        ),
-                        TextField(
-                          decoration: InputDecoration(
-                              border: OutlineInputBorder(),
-                              hintText: "Masukkan NIK"),
-                        )
-                      ],
-                    ),
+                              children: [
+                                Align(
+                                  alignment: Alignment.centerLeft,
+                                  child: Text(
+                                    "NIK",
+                                    style: TextStyle(
+                                      color: Color.fromRGBO(35, 60, 95, 1),
+                                      fontSize: 12,
+                                      fontWeight: FontWeight.bold
+                                    ),
+                                  ),
+                                ),
+                                SizedBox(height: 5,),
+                                TextField(
+                                  decoration: InputDecoration(
+                                    border: OutlineInputBorder(
+                                      borderRadius: BorderRadius.circular(10)
+                                    ),
+                                    hintText: "Masukkan NIK anda",
+                                    hintStyle: TextStyle(
+                                      fontSize: 11
+                                    ),
+                                    // isDense: true,
+                                    contentPadding: EdgeInsets.symmetric(vertical: 10, horizontal: 10)
+                                  ),
+                                )
+                              ],
+                            ),
                   ),
                   Container(
-                    margin: EdgeInsets.only(left: 10, right: 10, bottom: 10),
-                    height: 100,
+                    
+                    margin: EdgeInsets.only(left: 15, right: 15, bottom: 5),
+                    height: 85,
                     child: Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      // mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                       children: [
                         Expanded(
                           child: Container(
+                            // color: Colors.blue,
                             child: Column(
                               children: [
                                 Align(
@@ -233,38 +287,50 @@ class _MyHomePageState extends State<MyHomePage> {
                                   child: Text(
                                     "Tanggal Lahir",
                                     style: TextStyle(
-                                        color: Color.fromRGBO(35, 60, 95, 1),
-                                        fontSize: 16,
-                                        fontWeight: FontWeight.bold),
+                                      color: Color.fromRGBO(35, 60, 95, 1),
+                                      fontSize: 12,
+                                      fontWeight: FontWeight.bold
+                                    ),
                                   ),
                                 ),
-                                // form tanggal
+                                SizedBox(height: 5,),
+                                // form tanggal 
                                 TextField(
+                                  // controller: TextEditingController(text: pilihTanggal.toString()),
                                   decoration: InputDecoration(
-                                      border: OutlineInputBorder(),
-                                      hintText: "DD/MM/YYYY",
-                                      suffixIcon: IconButton(
-                                        icon: Icon(Icons.calendar_today),
-                                        onPressed: () async {
-                                          final DateTime? picked =
-                                              await showDatePicker(
-                                                  context: context,
-                                                  initialDate: DateTime.now(),
-                                                  firstDate: DateTime(1900),
-                                                  lastDate: DateTime.now());
-                                          if (picked != null &&
-                                              picked != pilihTanggal) {
-                                            setState(() {
-                                              pilihTanggal = picked;
-                                            });
-                                          }
-                                        },
-                                      )),
+                                    border: OutlineInputBorder(
+                                      borderRadius: BorderRadius.circular(10)
+                                    ),
+                                    hintText: "DD/MM/YYYY",
+                                    hintStyle: TextStyle(
+                                      fontSize: 11
+                                    ),
+                                    contentPadding: EdgeInsets.symmetric(vertical: 10, horizontal: 10),
+                                    suffixIcon: IconButton(
+                                      icon: Icon(Icons.calendar_month),
+                                      onPressed: () async {
+                                        final DateTime? picked = await showDatePicker(
+                                          context: context,
+                                          initialDate: DateTime.now(),
+                                          firstDate: DateTime(1900),
+                                          lastDate: DateTime.now()
+                                        );
+                                        if (picked != null && picked != pilihTanggal) {
+                                          setState(() {
+                                            pilihTanggal = picked;
+                                          });
+                                        }
+                                      },
+                                    )
+
+                                  ),
                                 )
                               ],
                             ),
                           ),
                         ),
+                        SizedBox(width: 10,),
+
                         Expanded(
                           child: Container(
                             // color: Colors.yellow,
@@ -275,19 +341,26 @@ class _MyHomePageState extends State<MyHomePage> {
                                   child: Text(
                                     "Gender",
                                     style: TextStyle(
-                                        color: Color.fromRGBO(35, 60, 95, 1),
-                                        fontSize: 16,
-                                        fontWeight: FontWeight.bold),
+                                      color: Color.fromRGBO(35, 60, 95, 1),
+                                      fontSize: 12,
+                                      fontWeight: FontWeight.bold
+                                    ),
                                   ),
                                 ),
+                                SizedBox(height: 5,),
                                 // drop down form hint sama ada borrdernya
-                                DropdownButton<String>(
+                                DropdownButtonFormField<String>(
+                                  decoration: InputDecoration(
+                                    border: OutlineInputBorder(
+                                      borderRadius: BorderRadius.circular(10)
+                                    ),
+                                    contentPadding: EdgeInsets.symmetric(vertical: 10, horizontal: 10),
+                                    ),
                                   value: selectedGender,
-                                  items: <String>['Laki-laki', 'Perempuan']
-                                      .map((String value) {
+                                  items: <String>['Laki-laki', 'Perempuan'].map((String value) {
                                     return DropdownMenuItem<String>(
                                       value: value,
-                                      child: Text(value),
+                                      child: Text(value, style: TextStyle(fontSize: 11)),
                                     );
                                   }).toList(),
                                   onChanged: (String? newValue) {
@@ -295,79 +368,101 @@ class _MyHomePageState extends State<MyHomePage> {
                                       selectedGender = newValue;
                                     });
                                   },
-                                )
+                                )  
                               ],
                             ),
                           ),
                         )
-                      ],
-                    ),
+                    ],),
                   ),
                   Container(
-                    margin: EdgeInsets.only(left: 10, right: 10, bottom: 10),
+                    margin: EdgeInsets.only(left: 15, right: 15, bottom: 5),
                     // color: Colors.red,
-                    height: 100,
+                    height: 85,
                     child: Column(
-                      children: [
-                        Align(
-                          alignment: Alignment.centerLeft,
-                          child: Text(
-                            "Email",
-                            style: TextStyle(
-                                color: Color.fromRGBO(35, 60, 95, 1),
-                                fontSize: 16,
-                                fontWeight: FontWeight.bold),
-                          ),
-                        ),
-                        TextField(
-                          decoration: InputDecoration(
-                              border: OutlineInputBorder(),
-                              hintText: "Masukkan Email"),
-                        )
-                      ],
-                    ),
+                              children: [
+                                Align(
+                                  alignment: Alignment.centerLeft,
+                                  child: Text(
+                                    "Email",
+                                    style: TextStyle(
+                                      color: Color.fromRGBO(35, 60, 95, 1),
+                                      fontSize: 12,
+                                      fontWeight: FontWeight.bold
+                                    ),
+                                  ),
+                                ),
+                                SizedBox(height: 5,),
+                                TextField(
+                                  decoration: InputDecoration(
+                                    border: OutlineInputBorder(
+                                      borderRadius: BorderRadius.circular(10)
+                                    ),
+                                    hintText: "Masukkan Email anda",
+                                    hintStyle: TextStyle(
+                                      fontSize: 11
+                                    ),
+                                    contentPadding: EdgeInsets.symmetric(vertical: 10, horizontal: 10)
+                                  ),
+                                )
+                              ],
+                            ),
                   ),
                   Container(
-                    margin: EdgeInsets.only(left: 10, right: 10, bottom: 10),
+                    margin: EdgeInsets.only(left: 15, right: 15, bottom: 5),
                     // color: Colors.red,
-                    height: 100,
+                    height: 85,
                     child: Column(
-                      children: [
-                        Align(
-                          alignment: Alignment.centerLeft,
-                          child: Text(
-                            "Alamat Rumah",
-                            style: TextStyle(
-                                color: Color.fromRGBO(35, 60, 95, 1),
-                                fontSize: 16,
-                                fontWeight: FontWeight.bold),
-                          ),
-                        ),
-                        TextField(
-                          decoration: InputDecoration(
-                              border: OutlineInputBorder(),
-                              hintText: "Masukkan Alamat Rumah"),
-                        )
-                      ],
-                    ),
+                              children: [
+                                Align(
+                                  alignment: Alignment.centerLeft,
+                                  child: Text(
+                                    "Alamat Rumah",
+                                    style: TextStyle(
+                                      color: Color.fromRGBO(35, 60, 95, 1),
+                                      fontSize: 12,
+                                      fontWeight: FontWeight.bold
+                                    ),
+                                  ),
+                                ),
+                                SizedBox(height: 5,),
+                                TextField(
+                                  decoration: InputDecoration(
+                                    border: OutlineInputBorder(
+                                      borderRadius: BorderRadius.circular(10)
+                                    ),
+                                    hintText: "Masukkan Alamat Rumah",
+                                    hintStyle: TextStyle(
+                                      fontSize: 11
+                                    ),
+                                    contentPadding: EdgeInsets.symmetric(vertical: 10, horizontal: 10)
+                                  ),
+                                )
+                              ],
+                            ),
                   ),
                   ElevatedButton(
-                    onPressed: () => {},
-                    child: Text("Simpan"),
+                    onPressed: () => {
+                      _showDialog(context)
+                    }, 
+                    child: Text("Simpan", style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold)),
                     style: ElevatedButton.styleFrom(
-                        // ukurannya panjangin sedikit
-                        minimumSize: Size(150, 50),
-                        foregroundColor: Colors.white,
-                        backgroundColor: Color.fromRGBO(35, 60, 95, 1),
-                        shape: RoundedRectangleBorder(
-                            borderRadius: BorderRadius.circular(10))),
+                      // ukurannya panjangin sedikit
+                      minimumSize: Size(150,50),
+                      foregroundColor: Colors.white, backgroundColor: Color.fromRGBO(35, 60, 95, 1),
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(20)
+                      )
+                    ),
                   )
                 ],
               ),
             )
           ],
-        ));
+        )
+    );
   }
+  
 
   Widget soalNo2() {
     return Scaffold(
@@ -454,38 +549,38 @@ class _MyHomePageState extends State<MyHomePage> {
                       ),
                     ),
                   ),
-                  Positioned(
-                    top: 210,
-                    left: 20,
-                    right: 20,
-                    child: Container(
-                      height: 150,
-                      decoration: BoxDecoration(
-                        color: Color.fromARGB(255, 190, 199, 206),
-                        borderRadius: BorderRadius.circular(8),
-                      ),
-                      child: Column(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: [
-                          Icon(
-                            Icons.search,
-                            color: Colors.black,
-                            size: 20,
-                          ),
-                          SizedBox(height: 8),
-                          Text(
-                            'Cari pemeriksaan kesehatan.',
-                            style: TextStyle(
-                              fontSize: 16,
-                              fontWeight: FontWeight.bold,
-                            ),
-                          ),
-                        ],
-                      ),
-                    ),
-                  ),
                 ],
               ),
+Center(
+  child: Container(
+    width: MediaQuery.of(context).size.width * 0.7,
+    height: 50,
+    padding: EdgeInsets.symmetric(horizontal: 20),
+    decoration: BoxDecoration(
+      color: Color.fromARGB(153, 190, 199, 206),
+      border: Border.all(color: Colors.black),
+      borderRadius: BorderRadius.circular(8),
+    ),
+    child: TextField(
+      decoration: InputDecoration(
+        prefixIcon: Icon(
+          Icons.search,
+          color: Colors.black,
+        ),
+        hintText: 'Cari pemeriksaan kesehatan',
+        hintStyle: TextStyle(
+          fontSize: 14,
+          // fontWeight: FontWeight.bold,
+          color: Colors.grey,
+          
+        ),
+        border: InputBorder.none,
+      ),
+    ),
+  ),
+),
+
+
               SizedBox(height: 20),
               Padding(
                 padding: const EdgeInsets.only(left: 20),
@@ -630,4 +725,82 @@ class _MyHomePageState extends State<MyHomePage> {
           ),
         ));
   }
+}
+
+Widget buildStack(String text, IconData iconData, double iconSize) {
+  return Container(
+    margin: EdgeInsets.all(8.0),
+    width: 100,
+    height: 130,
+    decoration: BoxDecoration(
+      color: Colors.white,
+      borderRadius: BorderRadius.circular(5),
+      border: Border.all(color: Colors.grey, width: 2),
+      boxShadow: [
+        BoxShadow(
+          color: Colors.black.withOpacity(0.2),
+          blurRadius: 6,
+          offset: Offset(0, 3),
+        ),
+      ],
+    ),
+    child: Column(
+      mainAxisAlignment: MainAxisAlignment.center,
+      children: [
+        Icon(
+          iconData,
+          color: Colors.orange,
+          size: iconSize,
+        ),
+        SizedBox(height: 5),
+        Text(
+          text,
+          textAlign: TextAlign.center,
+          style: TextStyle(
+            color: Colors.black,
+            fontSize: 12,
+            fontWeight: FontWeight.bold,
+          ),
+        ),
+      ],
+    ),
+  );
+}
+
+
+class ClipPathClass extends CustomClipper<Path> {
+  @override
+  Path getClip(Size size) {
+    var path = Path();
+    path.lineTo(0, size.height - 40);
+    path.quadraticBezierTo(size.width / 2, size.height, size.width, size.height - 40);
+    path.lineTo(size.width, 0);
+    path.close();
+    return path;
+  }
+
+  @override
+  bool shouldReclip(CustomClipper<Path> oldClipper) {
+    return false;
+  }
+}
+
+void _showDialog(BuildContext context) {
+  showDialog(
+    context: context,
+    builder: (BuildContext context) {
+      return AlertDialog(
+        title: Text("Profil"),
+        content: Text("Data berhasil disimpan"),
+        actions: [
+          ElevatedButton(
+            onPressed: () {
+              Navigator.of(context).pop();
+            },
+            child: Text("OK"),
+          ),
+        ],
+      );
+},
+);
 }
