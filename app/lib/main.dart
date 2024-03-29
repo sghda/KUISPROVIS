@@ -465,9 +465,29 @@ class _MyHomePageState extends State<MyHomePage> {
   
 
   Widget soalNo2() {
+    // Variable to track the current index of the selected item in the bottom navigation bar
+    int _currentIndex = 0;
+
+    // List of icons for the bottom navigation bar
+    List<IconData> _bottomIcons = [
+      Icons.home,
+      Icons.favorite,
+      Icons.notifications,
+      Icons.person,
+    ];
+
+    // List of labels for the bottom navigation bar items
+    List<String> _bottomLabels = [
+      'Beranda',
+      'Favorit',
+      'Notifikasi',
+      'Profil',
+    ];
+
     return Scaffold(
         appBar: AppBar(
-          backgroundColor: Theme.of(context).colorScheme.inversePrimary,
+          // backgroundColor: Theme.of(context).colorScheme.inversePrimary,
+          backgroundColor: Color.fromRGBO(255, 244, 85, 1),
         ),
         body: Center(
           child: Column(
@@ -549,38 +569,37 @@ class _MyHomePageState extends State<MyHomePage> {
                       ),
                     ),
                   ),
+              Center(
+                child: Container(
+                  margin: EdgeInsets.only(top: 220),
+                  width: MediaQuery.of(context).size.width * 0.7,
+                  height: 50,
+                  padding: EdgeInsets.symmetric(horizontal: 20),
+                  decoration: BoxDecoration(
+                    color: Color.fromARGB(153, 190, 199, 206),
+                    border: Border.all(color: Colors.black),
+                    borderRadius: BorderRadius.circular(8),
+                  ),
+                  child: TextField(
+                    decoration: InputDecoration(
+                      prefixIcon: Icon(
+                        Icons.search,
+                        color: Colors.black,
+                      ),
+                      hintText: 'Cari pemeriksaan kesehatan',
+                      hintStyle: TextStyle(
+                        fontSize: 14,
+                        // fontWeight: FontWeight.bold,
+                        color: Colors.grey,
+                        
+                      ),
+                      border: InputBorder.none,
+                    ),
+                  ),
+                ),
+              ),
                 ],
               ),
-Center(
-  child: Container(
-    width: MediaQuery.of(context).size.width * 0.7,
-    height: 50,
-    padding: EdgeInsets.symmetric(horizontal: 20),
-    decoration: BoxDecoration(
-      color: Color.fromARGB(153, 190, 199, 206),
-      border: Border.all(color: Colors.black),
-      borderRadius: BorderRadius.circular(8),
-    ),
-    child: TextField(
-      decoration: InputDecoration(
-        prefixIcon: Icon(
-          Icons.search,
-          color: Colors.black,
-        ),
-        hintText: 'Cari pemeriksaan kesehatan',
-        hintStyle: TextStyle(
-          fontSize: 14,
-          // fontWeight: FontWeight.bold,
-          color: Colors.grey,
-          
-        ),
-        border: InputBorder.none,
-      ),
-    ),
-  ),
-),
-
-
               SizedBox(height: 20),
               Padding(
                 padding: const EdgeInsets.only(left: 20),
@@ -635,9 +654,6 @@ Center(
                           ),
                           child: Icon(Icons.chat, color: Colors.orange),
                         ),
-                        // SizedBox(
-                        //     height:
-                        //         5), // Penambahan jarak antara ikon dan teks keterangan
                         Text(
                           "Chat dengan CS",
                           style: TextStyle(
@@ -723,9 +739,29 @@ Center(
               ),
             ],
           ),
-        ));
+        ),
+        bottomNavigationBar: BottomNavigationBar(
+      currentIndex: _currentIndex,
+      type: BottomNavigationBarType.fixed,
+      selectedItemColor: Colors.orange,
+      onTap: (int index) {
+        _currentIndex = index;
+      },
+      items: List.generate(
+        _bottomIcons.length,
+        (index) => BottomNavigationBarItem(
+          icon: Icon(_bottomIcons[index]),
+          label: _bottomLabels[index],
+        ),
+      ),
+    ),
+  
+      );
   }
 }
+
+
+// navbar bottom 4 icon
 
 Widget buildStack(String text, IconData iconData, double iconSize) {
   return Container(
@@ -804,3 +840,4 @@ void _showDialog(BuildContext context) {
 },
 );
 }
+
